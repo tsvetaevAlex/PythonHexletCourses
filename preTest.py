@@ -1,14 +1,22 @@
-def normalize_url(adr: str) -> str:
-    not_secured_prefix: str = "'http://"
-    secured_prefix: str = "https://"
-    result = None
-    if not_secured_prefix in adr:
-        result = adr.replace(not_secured_prefix, secured_prefix)
+non_secured_prefix: str = "http://"
+secured_prefix: str = "https://"
+
+
+def normalize_url(url: str) -> str:
+    if (secured_prefix in url):
+        return url
+
+    if (non_secured_prefix in url):
+        result = url.replace(non_secured_prefix, secured_prefix)
         return result
-    else:
-        result = secured_prefix + adr
-    print (result)
-    return result
+
+    if not (secured_prefix in url) and not (non_secured_prefix in url):
+        result = secured_prefix + url
+        return result
+
+    if (non_secured_prefix in url):
+        result = url.replace(non_secured_prefix, secured_prefix)
+        return result
 
 
 normalize_url('https://ya.ru')  # https://ya.ru
